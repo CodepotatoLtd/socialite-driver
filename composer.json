@@ -1,0 +1,40 @@
+{
+  "name": "codepotatoltd/socialite-driver",
+  "description": "Codepotato OAuth2 Provider for Laravel Socialite",
+  "homepage": "https://github.com/codepotatoltd/socialite-driver",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "iWader",
+      "email": "wade@iwader.co.uk",
+      "homepage": "https://iwader.co.uk/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^5.6||^7.0",
+    "socialiteproviders/manager": "^2.1"
+  },
+  "require-dev": {
+    "mockery/mockery": "^0.9.5",
+    "phpunit/phpunit": "4.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Codepotato\\Socialite\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Codepotato\\Socialite\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

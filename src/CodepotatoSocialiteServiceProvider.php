@@ -18,12 +18,17 @@ class CodepotatoSocialiteServiceProvider extends AbstractProvider implements Pro
      */
     protected $scopes = [''];
 
+    protected function getServiceUrl()
+    {
+        return 'https://identity.codepotato.co.uk/';
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase('https://identity.codepotato.co.uk/oauth/authorize', $state);
+        return $this->buildAuthUrlFromBase($this->getServiceUrl() . 'oauth/authorize', $state);
     }
 
     /**
@@ -31,7 +36,7 @@ class CodepotatoSocialiteServiceProvider extends AbstractProvider implements Pro
      */
     protected function getTokenUrl()
     {
-        return 'https://identity.codepotato.co.uk/oauth/token';
+        return $this->getServiceUrl() . 'oauth/token';
     }
 
     /**
@@ -39,7 +44,13 @@ class CodepotatoSocialiteServiceProvider extends AbstractProvider implements Pro
      */
     protected function getUserByToken($token)
     {
-        // TODO: Implement guzzle call to fetch user from the api.
+        $response = $this->getHttpClient()->get($this->getServiceUrl() . 'user', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+
+        return json_decode($response->getBody(), true);
     }
 
     /**

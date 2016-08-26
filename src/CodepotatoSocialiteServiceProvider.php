@@ -44,13 +44,13 @@ class CodepotatoSocialiteServiceProvider extends AbstractProvider implements Pro
      */
     protected function getUserByToken($token)
     {
-        $response = $this->getHttpClient()->get($this->getServiceUrl() . 'user', [
+        $response = $this->getHttpClient()->get($this->getServiceUrl() . 'api/user', [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
             ],
         ]);
 
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
@@ -60,7 +60,7 @@ class CodepotatoSocialiteServiceProvider extends AbstractProvider implements Pro
     {
         return (new User())->setRaw($user)->map([
             'id'       => $user['id'],
-            'nickname' => $user['username'],
+            'nickname' => $user['name'],
             'name'     => $user['name'],
             'email'    => $user['email'],
             'avatar'   => $user['avatar_url'],
